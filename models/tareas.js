@@ -5,6 +5,7 @@
  *       { 'uuid-212321321-1343432432 : { id:12, desc:asad, completadoEn: 942212}' }
  */
 
+import colors from 'colors';
 import { Tarea } from "./tarea.js";
 
 class Tareas {
@@ -17,7 +18,6 @@ class Tareas {
 
     get listadoArr(){
         const listado = [];
-
         //Extraer las llaves que se encuentren en el objeto
         Object.keys(this._listado).forEach(key =>{
             // console.log(key);
@@ -26,6 +26,13 @@ class Tareas {
         })
 
         return listado;
+    }
+
+
+    crearTarea( desc = '' ){
+        const tarea = new Tarea(desc);
+        this._listado[tarea.id] = tarea;
+        // console.log(tarea);
     }
 
     cargarTareasFromArray( tareas ) {
@@ -38,19 +45,23 @@ class Tareas {
         // console.log(this._listado);
     }
 
-
-    crearTarea( desc = '' ){
-        const tarea = new Tarea(desc);
-        this._listado[tarea.id] = tarea;
-    }
-
-    
     listadoCompleto(){
-        //numero en verde
-        //completada : verde
-        //Pendiente: rojo
-        //1. uno en verde, despues descripcion, :: Completada | Pendiente
-        //. 
+
+        console.log('\n');
+
+        this.listadoArr.forEach((tarea, i) =>{
+
+            const idx = `${i + 1}`.green;
+            const { desc, completadoEn } = tarea;
+            // console.log(desc)
+            const estado = (completadoEn) 
+                                ? 'Completado'.green
+                                : 'Pendiente'.red
+            
+            console.log(`${ idx }. ${ desc } :: ${ estado }`)
+
+        })
+
     }
 
 }

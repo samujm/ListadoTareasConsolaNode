@@ -83,8 +83,8 @@ const leerInput = async(message)=>{
         }
     ];
 
-    const respuesta = await inquirer.prompt(question);
-    return respuesta;
+    const { desc } = await inquirer.prompt(question);
+    return desc;
 }
 
 
